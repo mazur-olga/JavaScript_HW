@@ -1,11 +1,11 @@
 //  Без А
 
-^(?!.*[Aa])\w{6,}$
+(?:[^Aa]{6,})+
 
 
 // Параноя
 
-var arr = [
+let arr = [
     {
         userName:"Test",
         lastName:"Test",
@@ -23,10 +23,12 @@ var arr = [
     },
 ];
 
-var trustedEmails = arr.filter(function(item) {
-    var emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@(gmail\.com|yahoo\.com)$/;
+let trustedEmails = arr.filter(function(item) {
+    let emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@(gmail\.com|yahoo\.com)$/;
 
     return emailRegex.test(item.email) && item.email.indexOf('@') !== -1;
+}).map(function(item) {
+    return item.email;
 });
 
 console.log(trustedEmails);
