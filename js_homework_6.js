@@ -32,20 +32,20 @@ const company = {
                 {
                     name: 'Клієнт 1.1',
                     type: 'subSubCompany',
-                    uses: 'Рішення для продажу квитків',
-                    sells: 'Рішення для продажу квитків',
+                    uses: 'Рішення для продажу квитків_1',
+                    sells: 'Рішення для продажу квитків_1',
                 },
                 {
                     name: 'Клієнт 1.2',
                     type: 'subSubCompany',
-                    uses: 'Рішення для продажу квитків',
-                    sells: 'Рішення для продажу квитків',
+                    uses: 'Рішення для продажу квитків_2',
+                    sells: 'Рішення для продажу квитків_2',
                     partners: [
                         {
                             name: 'Клієнт 1.2.3',
                             type: 'subSubCompany',
-                            uses: 'Рішення для продажу квитків',
-                            sells: 'Рішення для продажу квитків',
+                            uses: 'Рішення для продажу квитків_3',
+                            sells: 'Рішення для продажу квитків_3',
                         }
                     ]
                 }
@@ -77,7 +77,18 @@ function findValueByKey(companyName, company) {
         }
     }
 
+    if (company.partners) {
+        for (let i = 0; i < company.partners.length; i++) {
+            const partner = company.partners[i];
+            const result = findValueByKey(companyName, partner);
+            if (result) {
+                return result;
+            }
+        }
+    }
+
     return null;
 }
-const companyInfo = findValueByKey('Клієнт 1.2.3', company);
+
+const companyInfo = findValueByKey('Клієнт 1.2', company);
 console.log(companyInfo);
